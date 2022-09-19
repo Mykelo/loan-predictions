@@ -7,12 +7,31 @@ stages:
       md5: 40d0463a883c602e3732b5f821a3dac7
       size: 1675133810
     - path: src/features/split_data.py
-      md5: 99d637e971dcbe2fc3669fb2ec2d0ddb
-      size: 1274
+      md5: 9fc5f8def7fd8f728baf1b14c7061aa8
+      size: 1308
     outs:
-    - path: data/interim/test.csv
-      md5: 9853d440bc5a4c02ea190c700af18a16
-      size: 200311815
-    - path: data/interim/train.csv
-      md5: d3f2bd1fac741d905046da83768cabc3
-      size: 800943581
+    - path: data/interim/test_raw.csv
+      md5: fb79a5dc2191f6b697be6b00b2ff66c9
+      size: 198194262
+    - path: data/interim/train_raw.csv
+      md5: f0224d40670d7e39726891f26da5d4fe
+      size: 792688625
+  clean_data:
+    cmd: python src/features/clean_data.py
+    deps:
+    - path: data/interim/test_raw.csv
+      md5: fb79a5dc2191f6b697be6b00b2ff66c9
+      size: 198194262
+    - path: data/interim/train_raw.csv
+      md5: f0224d40670d7e39726891f26da5d4fe
+      size: 792688625
+    - path: src/features/clean_data.py
+      md5: 2a9d9c5f1fdedbbf18f1762525e93b16
+      size: 4270
+    outs:
+    - path: data/interim/test_clean.csv
+      md5: 1727c7eff45e7490cc7fee3dc2f5395f
+      size: 140786782
+    - path: data/interim/train_clean.csv
+      md5: b4d66f2befe69c981a6d1a59e637dc36
+      size: 563113066
