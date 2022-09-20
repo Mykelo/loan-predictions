@@ -26,12 +26,34 @@ stages:
       md5: f0224d40670d7e39726891f26da5d4fe
       size: 792688625
     - path: src/features/clean_data.py
-      md5: 2a9d9c5f1fdedbbf18f1762525e93b16
-      size: 4270
+      md5: fff75106be6d0b4a38781fbc50674472
+      size: 4656
     outs:
     - path: data/interim/test_clean.csv
-      md5: 1727c7eff45e7490cc7fee3dc2f5395f
-      size: 140786782
+      md5: 3919508089f4ac2d721add20db0b2116
+      size: 140510737
     - path: data/interim/train_clean.csv
-      md5: b4d66f2befe69c981a6d1a59e637dc36
-      size: 563113066
+      md5: 424716ffaaae0d6b63b8e1cab5b7832a
+      size: 562009103
+  encode_features:
+    cmd: python src/features/encode_features.py
+    deps:
+    - path: data/interim/test_clean.csv
+      md5: 3919508089f4ac2d721add20db0b2116
+      size: 140510737
+    - path: data/interim/train_clean.csv
+      md5: 424716ffaaae0d6b63b8e1cab5b7832a
+      size: 562009103
+    - path: src/features/encode_features.py
+      md5: fcd0ebd5c08311d7be7fceac3aae01d7
+      size: 1839
+    outs:
+    - path: data/processed/test.npy
+      md5: 34517cbcec2287741dc0620a67db76aa
+      size: 380432480
+    - path: data/processed/train.npy
+      md5: 2d6649f02dcbd913874da45826674975
+      size: 1521728160
+    - path: models/columns_encoder.pkl
+      md5: a907c59e3697637ffce2921a657d8f07
+      size: 6158

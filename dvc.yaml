@@ -23,6 +23,6 @@ stages:
     - data/interim/test_clean.csv
     - src/features/encode_features.py
     outs:
-    - models/encoders.pkl
-    - data/processed/train.csv
-    - data/processed/test.csv
+    - models/columns_encoder.pkl
+    - data/processed/train.npy
+    - data/processed/test.npy

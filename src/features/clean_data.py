@@ -27,6 +27,10 @@ def fill_na(df: pd.DataFrame, source: pd.DataFrame) -> pd.DataFrame:
     df_copy = df.copy()
     df_copy[fill_max] = df_copy[fill_max].fillna(source[fill_max].max(numeric_only=True))
     df_copy[fill_min] = df_copy[fill_min].fillna(source[fill_min].min(numeric_only=True))
+    # df_copy['grade'] = df_copy['grade'].fillna(source['grade'].mode().iloc[0])
+
+    fill_most_frequent = df_copy.select_dtypes('object').columns.values
+    df_copy[fill_most_frequent] = df_copy[fill_most_frequent].fillna(source[fill_most_frequent].mode().iloc[0])
 
     return df_copy
 
@@ -99,6 +103,9 @@ def main() -> None:
 
     train_data = train_data.pipe(drop_columns, high_corr_num_to_drop)
     test_data = test_data.pipe(drop_columns, high_corr_num_to_drop)
+
+    train_data['term'] = train_data['term'].str.lstrip()
+    test_data['term'] = test_data['term'].str.lstrip()
 
     train_data.to_csv('./data/interim/train_clean.csv', index=False)
     test_data.to_csv('./data/interim/test_clean.csv', index=False)
