@@ -76,3 +76,45 @@ stages:
     - path: models/decision_tree.pkl
       md5: 9151cd9e93c3ea6ba9dae6a28df01b13
       size: 516929
+  train_log_reg_rf_select:
+    cmd: python src/models/training/train_log_reg_rf_select.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/log_reg_rf_select.pkl
+      md5: 0c7c50ad9a2248707d7a19f21190fe9e
+      size: 1478
+    - path: models/random_forest.pkl
+      md5: fb4f993eabd31f92151b0ea2654222a9
+      size: 129024
+  train_xgboost:
+    cmd: python src/models/training/train_xgboost.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/xgboost.pkl
+      md5: 0862814de64215c83ec2370021032f2d
+      size: 339419
+  train_log_reg_full:
+    cmd: python src/models/training/train_log_reg_full.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/log_reg_full.pkl
+      md5: b8861f007ff9f28e2e2c7b734bfb785f
+      size: 2045

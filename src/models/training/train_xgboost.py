@@ -14,15 +14,16 @@ def main() -> None:
     y = np.load(args.y_input)
 
     xgb_model = xgb.XGBClassifier()
-    parameters = {
-        'n_estimators': [100, 200, 300, 400],
-        'learning_rate': [0.1, 0.2, 0.3, 0.4],
-        'max_depth': [3, 4, 5, 6]
-    }
-    grid = GridSearchCV(xgb_model, parameters, scoring='f1_macro', cv=5)
-    grid = grid.fit(X, y)
+    # parameters = {
+    #     'n_estimators': [100, 200, 300, 400],
+    #     'learning_rate': [0.1, 0.2, 0.3, 0.4],
+    #     'max_depth': [3, 4, 5, 6]
+    # }
+    # grid = GridSearchCV(xgb_model, parameters, scoring='f1_macro', cv=5)
+    # grid = grid.fit(X, y)
+    xgb_model = xgb_model.fit(X, y)
 
     with open('./models/xgboost.pkl', 'wb') as f:
-        pickle.dump(grid.best_estimator_, f)
+        pickle.dump(xgb_model, f)
 
 main()
