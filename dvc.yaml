@@ -24,5 +24,50 @@ stages:
     - src/features/encode_features.py
     outs:
     - models/columns_encoder.pkl
-    - data/processed/train.npy
-    - data/processed/test.npy
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    
+  train_log_reg_full:
+    cmd: python src/models/training/train_log_reg_full.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    outs:
+    - models/log_reg_full.pkl
+  train_log_reg_rf_select:
+    cmd: python src/models/training/train_log_reg_rf_select.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    outs:
+    - models/log_reg_rf_select.pkl
+    - models/random_forest.pkl
+  train_xgboost:
+    cmd: python src/models/training/train_xgboost.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    outs:
+    - models/xgboost.pkl
+  train_decision_tree:
+    cmd: python src/models/training/train_decision_tree.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    outs:
+    - models/decision_tree.pkl
+    
+  # evaluate_log_reg_full:
+  #   cmd: python src/models/evaluation/evaluate_model.py
+  #   deps:
+  #   - data/processed/X_test.npy
+  #   - data/processed/y_test.npy
+  #   - models/log_reg_full.pkl
+  # evaluate_log_reg_rf_select:
+  #   cmd: python src/models/evaluation/evaluate_model.py
+  #   deps:
+  #   - data/processed/X_test.npy
+  #   - data/processed/y_test.npy
+  #   - models/log_reg_rf_select.pkl

@@ -24,6 +24,11 @@ def main() -> None:
     test_data = pd.read_csv(args.test_input, parse_dates=date_columns, infer_datetime_format=True)
     test_data = test_data.reset_index(drop=True)
 
+    train_y = train_data['target'].to_numpy()
+    test_y = test_data['target'].to_numpy()
+    train_data = train_data.drop(columns=['target'], axis=1)
+    test_data = test_data.drop(columns=['target'], axis=1)
+
     numeric_columns = train_data.select_dtypes('number').columns.values
     oh_columns = train_data.select_dtypes('object').columns.values 
 
@@ -35,11 +40,15 @@ def main() -> None:
     train_data = column_trans.fit_transform(train_data)
     test_data = column_trans.transform(test_data)
 
-    with open('./data/processed/train.npy', 'wb') as f:
+    with open('./data/processed/X_train.npy', 'wb') as f:
         np.save(f, train_data)
+    with open('./data/processed/y_train.npy', 'wb') as f:
+        np.save(f, train_y)
 
-    with open('./data/processed/test.npy', 'wb') as f:
+    with open('./data/processed/X_test.npy', 'wb') as f:
         np.save(f, test_data)
+    with open('./data/processed/y_test.npy', 'wb') as f:
+        np.save(f, test_y)
 
     with open('./models/columns_encoder.pkl', 'wb') as f:
         pickle.dump(column_trans, f)

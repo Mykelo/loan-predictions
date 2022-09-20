@@ -45,15 +45,34 @@ stages:
       md5: 424716ffaaae0d6b63b8e1cab5b7832a
       size: 562009103
     - path: src/features/encode_features.py
-      md5: fcd0ebd5c08311d7be7fceac3aae01d7
-      size: 1839
+      md5: ab73830121aff7e5b63b7a1fe9b29712
+      size: 2233
     outs:
-    - path: data/processed/test.npy
-      md5: 34517cbcec2287741dc0620a67db76aa
-      size: 380432480
-    - path: data/processed/train.npy
-      md5: 2d6649f02dcbd913874da45826674975
-      size: 1521728160
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
     - path: models/columns_encoder.pkl
-      md5: a907c59e3697637ffce2921a657d8f07
-      size: 6158
+      md5: 82834c4134cb61a686f35506dc75b99e
+      size: 6121
+  train_decision_tree:
+    cmd: python src/models/training/train_decision_tree.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/decision_tree.pkl
+      md5: 9151cd9e93c3ea6ba9dae6a28df01b13
+      size: 516929
