@@ -1,0 +1,59 @@
+schema: '2.0'
+stages:
+  split_data:
+    cmd: python src/features/split_data.py
+    deps:
+    - path: data/raw/accepted_2007_to_2018Q4.csv
+      md5: 40d0463a883c602e3732b5f821a3dac7
+      size: 1675133810
+    - path: src/features/split_data.py
+      md5: 9fc5f8def7fd8f728baf1b14c7061aa8
+      size: 1308
+    outs:
+    - path: data/interim/test_raw.csv
+      md5: fb79a5dc2191f6b697be6b00b2ff66c9
+      size: 198194262
+    - path: data/interim/train_raw.csv
+      md5: f0224d40670d7e39726891f26da5d4fe
+      size: 792688625
+  clean_data:
+    cmd: python src/features/clean_data.py
+    deps:
+    - path: data/interim/test_raw.csv
+      md5: fb79a5dc2191f6b697be6b00b2ff66c9
+      size: 198194262
+    - path: data/interim/train_raw.csv
+      md5: f0224d40670d7e39726891f26da5d4fe
+      size: 792688625
+    - path: src/features/clean_data.py
+      md5: fff75106be6d0b4a38781fbc50674472
+      size: 4656
+    outs:
+    - path: data/interim/test_clean.csv
+      md5: 3919508089f4ac2d721add20db0b2116
+      size: 140510737
+    - path: data/interim/train_clean.csv
+      md5: 424716ffaaae0d6b63b8e1cab5b7832a
+      size: 562009103
+  encode_features:
+    cmd: python src/features/encode_features.py
+    deps:
+    - path: data/interim/test_clean.csv
+      md5: 3919508089f4ac2d721add20db0b2116
+      size: 140510737
+    - path: data/interim/train_clean.csv
+      md5: 424716ffaaae0d6b63b8e1cab5b7832a
+      size: 562009103
+    - path: src/features/encode_features.py
+      md5: fcd0ebd5c08311d7be7fceac3aae01d7
+      size: 1839
+    outs:
+    - path: data/processed/test.npy
+      md5: 34517cbcec2287741dc0620a67db76aa
+      size: 380432480
+    - path: data/processed/train.npy
+      md5: 2d6649f02dcbd913874da45826674975
+      size: 1521728160
+    - path: models/columns_encoder.pkl
+      md5: a907c59e3697637ffce2921a657d8f07
+      size: 6158
