@@ -1,0 +1,24 @@
+stages:
+  test_model:
+    foreach:
+      log_reg_full:
+        name: log_reg_full
+      log_reg_rf_select:
+        name: log_reg_rf_select
+      xgboost:
+        name: xgboost
+      decision_tree:
+        name: decision_tree
+    do:
+      cmd: >-
+        python src/evaluation/train_evaluate_model.py 
+        --metrics-file=./metrics/${item.name}.json
+        --model=${item.name}
+      wdir: ../../
+      deps:
+        - data/processed/X_train.npy
+        - data/processed/X_test.npy
+        - data/processed/y_train.npy
+        - data/processed/y_test.npy
+      metrics:
+        - ./metrics/${item.name}.json

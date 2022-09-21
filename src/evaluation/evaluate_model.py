@@ -28,4 +28,6 @@ def main() -> None:
     with open(args.metrics_file, 'w') as f:
         json.dump(metrics, f)
 
-main()
+
+if __name__ == '__main__':
+    main()

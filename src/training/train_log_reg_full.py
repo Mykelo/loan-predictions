@@ -17,4 +17,6 @@ def main() -> None:
     with open(f'./models/log_reg_full/rs_{args.random_state}.pkl', 'wb') as f:
         pickle.dump(clf, f)
 
-main()
+
+if __name__ == '__main__':
+    main()

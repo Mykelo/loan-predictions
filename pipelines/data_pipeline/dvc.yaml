@@ -1,0 +1,33 @@
+stages:
+  split_data:
+    cmd: python src/features/split_data.py
+    wdir: ../../
+    deps:
+    - data/raw/accepted_2007_to_2018Q4.csv
+    - src/features/split_data.py
+    outs:
+    - data/interim/train_raw.csv
+    - data/interim/test_raw.csv
+  clean_data:
+    cmd: python src/features/clean_data.py
+    wdir: ../../
+    deps:
+    - data/interim/train_raw.csv
+    - data/interim/test_raw.csv
+    - src/features/clean_data.py
+    outs:
+    - data/interim/train_clean.csv
+    - data/interim/test_clean.csv
+  encode_features:
+    cmd: python src/features/encode_features.py
+    wdir: ../../
+    deps:
+    - data/interim/train_clean.csv
+    - data/interim/test_clean.csv
+    - src/features/encode_features.py
+    outs:
+    - models/columns_encoder.pkl
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
