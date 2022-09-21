@@ -58,16 +58,48 @@ stages:
     - data/processed/y_train.npy
     outs:
     - models/decision_tree.pkl
-    
-  # evaluate_log_reg_full:
-  #   cmd: python src/models/evaluation/evaluate_model.py
-  #   deps:
-  #   - data/processed/X_test.npy
-  #   - data/processed/y_test.npy
-  #   - models/log_reg_full.pkl
-  # evaluate_log_reg_rf_select:
-  #   cmd: python src/models/evaluation/evaluate_model.py
-  #   deps:
-  #   - data/processed/X_test.npy
-  #   - data/processed/y_test.npy
-  #   - models/log_reg_rf_select.pkl
+
+  evaluate_log_reg_full:
+    cmd: >-
+      python src/models/evaluation/evaluate_model.py 
+      --metrics-file=./metrics/log_reg_full.json
+      --model-file=./models/log_reg_full.pkl
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/log_reg_full.pkl
+    metrics:
+    - ./metrics/log_reg_full.json
+  evaluate_log_reg_rf_select:
+    cmd: >-
+      python src/models/evaluation/evaluate_model.py 
+      --metrics-file=./metrics/log_reg_rf_select.json
+      --model-file=./models/log_reg_rf_select.pkl
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/log_reg_rf_select.pkl
+    metrics:
+    - ./metrics/log_reg_rf_select.json
+  evaluate_xgboost:
+    cmd: >-
+      python src/models/evaluation/evaluate_model.py 
+      --metrics-file=./metrics/xgboost.json
+      --model-file=./models/xgboost.pkl
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/xgboost.pkl
+    metrics:
+    - ./metrics/xgboost.json
+  evaluate_decision_tree:
+    cmd: >-
+      python src/models/evaluation/evaluate_model.py 
+      --metrics-file=./metrics/decision_tree.json
+      --model-file=./models/decision_tree.pkl
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/decision_tree.pkl
+    metrics:
+    - ./metrics/decision_tree.json

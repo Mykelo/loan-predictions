@@ -118,3 +118,37 @@ stages:
     - path: models/log_reg_full.pkl
       md5: b8861f007ff9f28e2e2c7b734bfb785f
       size: 2045
+  evaluate_log_reg_full:
+    cmd: python src/models/evaluation/evaluate_model.py  --metrics-file=./metrics/log_reg_full.json
+      --model-file=./models/log_reg_full.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/log_reg_full.pkl
+      md5: b8861f007ff9f28e2e2c7b734bfb785f
+      size: 2045
+    outs:
+    - path: ./metrics/log_reg_full.json
+      md5: 8b531b9f46fabf69cff3a077ff67a077
+      size: 129
+  evaluate_xgboost:
+    cmd: python src/models/evaluation/evaluate_model.py  --metrics-file=./metrics/xgboost.json
+      --model-file=./models/xgboost.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/xgboost.pkl
+      md5: 0862814de64215c83ec2370021032f2d
+      size: 339419
+    outs:
+    - path: ./metrics/xgboost.json
+      md5: 5eac65fcc7aea68201853f60299bf93a
+      size: 127
