@@ -152,3 +152,123 @@ stages:
     - path: ./metrics/xgboost.json
       md5: 5eac65fcc7aea68201853f60299bf93a
       size: 127
+  train@log_reg_full:
+    cmd: python src/training/train_log_reg_full.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/log_reg_full.pkl
+      md5: b8861f007ff9f28e2e2c7b734bfb785f
+      size: 2045
+  evaluate@log_reg_full:
+    cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/log_reg_full.json
+      --model-file=./models/log_reg_full.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/log_reg_full.pkl
+      md5: b8861f007ff9f28e2e2c7b734bfb785f
+      size: 2045
+    outs:
+    - path: ./metrics/log_reg_full.json
+      md5: 8b531b9f46fabf69cff3a077ff67a077
+      size: 129
+  train@decision_tree:
+    cmd: python src/training/train_decision_tree.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/decision_tree.pkl
+      md5: ba47fd704667cdcb9c5e523796bd78ab
+      size: 516930
+  evaluate@decision_tree:
+    cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/decision_tree.json
+      --model-file=./models/decision_tree.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/decision_tree.pkl
+      md5: ba47fd704667cdcb9c5e523796bd78ab
+      size: 516930
+    outs:
+    - path: ./metrics/decision_tree.json
+      md5: 22558b929aca3cfcbee0a71332bff7c4
+      size: 129
+  train@xgboost:
+    cmd: python src/training/train_xgboost.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/xgboost.pkl
+      md5: 0862814de64215c83ec2370021032f2d
+      size: 339419
+  evaluate@xgboost:
+    cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/xgboost.json
+      --model-file=./models/xgboost.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/xgboost.pkl
+      md5: 0862814de64215c83ec2370021032f2d
+      size: 339419
+    outs:
+    - path: ./metrics/xgboost.json
+      md5: 5eac65fcc7aea68201853f60299bf93a
+      size: 127
+  evaluate@log_reg_rf_select:
+    cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/log_reg_rf_select.json
+      --model-file=./models/log_reg_rf_select.pkl
+    deps:
+    - path: data/processed/X_test.npy
+      md5: c8eb64ff52b452ca67a27b3d843f6442
+      size: 378220664
+    - path: data/processed/y_test.npy
+      md5: b7728573eb3db9d255d5f578541f3f36
+      size: 2211944
+    - path: models/log_reg_rf_select.pkl
+      md5: 387228a89d89417498446defabd7214f
+      size: 131309
+    outs:
+    - path: ./metrics/log_reg_rf_select.json
+      md5: 787d5763352a1c9fe84d37b8b4e2cdf1
+      size: 129
+  train@log_reg_rf_select:
+    cmd: python src/training/train_log_reg_rf_select.py
+    deps:
+    - path: data/processed/X_train.npy
+      md5: 9f37f27609e6dc55872735b0519508f0
+      size: 1512880904
+    - path: data/processed/y_train.npy
+      md5: 635027b569a6bd54bfc25707ef2ee8f9
+      size: 8847384
+    outs:
+    - path: models/log_reg_rf_select.pkl
+      md5: 387228a89d89417498446defabd7214f
+      size: 131309

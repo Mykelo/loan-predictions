@@ -1,8 +1,10 @@
+import os, sys
+sys.path.insert(0, os.path.abspath("."))
+
 import numpy as np
 import argparse
-from sklearn.linear_model import LogisticRegression
+from src.models.custom_models import LogisticRegressionRF
 import pickle
-from sklearn.ensemble import RandomForestClassifier
 
 
 def main() -> None:
@@ -14,16 +16,10 @@ def main() -> None:
 
     X = np.load(args.X_input)
     y = np.load(args.y_input)
-    
-    clf_rf = RandomForestClassifier(max_depth=3, random_state=args.random_state).fit(X, y)
-    ind = np.argsort(clf_rf.feature_importances_)[-100:]
-    X_selected = X[:, ind]
 
-    clf = LogisticRegression(max_iter=200, random_state=args.random_state).fit(X_selected, y)
+    clf = LogisticRegressionRF(random_state=args.random_state, features_num=100).fit(X, y)
+
     with open('./models/log_reg_rf_select.pkl', 'wb') as f:
         pickle.dump(clf, f)
-    
-    with open('./models/random_forest.pkl', 'wb') as f:
-        pickle.dump(clf_rf, f)
 
 main()

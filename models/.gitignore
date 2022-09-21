@@ -1,6 +1,6 @@
 /columns_encoder.pkl
 /decision_tree.pkl
-/log_reg_rf_select.pkl
 /random_forest.pkl
 /xgboost.pkl
 /log_reg_full.pkl
+/log_reg_rf_select.pkl

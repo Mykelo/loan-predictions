@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.abspath("."))
 import numpy as np
 import argparse
 import pickle
-from src.models.evaluation.utils import calculate_metrics
+from src.evaluation.utils import calculate_metrics
 import json
 
 
