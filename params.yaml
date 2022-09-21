@@ -1,0 +1,9 @@
+train:
+  xgboost:
+    random_state: 1
+  log_reg_rf_select:
+    random_state: 1
+  log_reg_full:
+    random_state: 1
+  decision_tree:
+    random_state: 1

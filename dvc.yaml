@@ -31,35 +31,59 @@ stages:
     
   train:
     foreach:
-      - log_reg_full
-      - log_reg_rf_select
-      - xgboost
-      - decision_tree
+      log_reg_full:
+        name: log_reg_full
+        random_state: ${train.log_reg_full.random_state}
+      log_reg_rf_select:
+        name: log_reg_rf_select
+        random_state: ${train.log_reg_rf_select.random_state}
+      xgboost:
+        name: xgboost
+        random_state: ${train.xgboost.random_state}
+      decision_tree:
+        name: decision_tree
+        random_state: ${train.decision_tree.random_state}
     do:
-      cmd: python src/training/train_${item}.py
+      cmd: python src/training/train_${item.name}.py --random-state=${item.random_state}
       deps:
         - data/processed/X_train.npy
         - data/processed/y_train.npy
       outs:
-        - models/${item}.pkl
+        - models/${item.name}/rs_${item.random_state}.pkl
+        
+  # train_log_reg_rf_select:
+  #   cmd: python src/training/train_log_reg_rf_select.py --random-state=${train.random_state}
+  #   deps:
+  #   - data/processed/X_train.npy
+  #   - data/processed/y_train.npy
+  #   outs:
+  #   - models/log_reg_rf_select/rs_${train.random_state}.pkl
 
   evaluate:
     foreach:
-      - log_reg_full
-      - log_reg_rf_select
-      - xgboost
-      - decision_tree
+      log_reg_full:
+        name: log_reg_full
+        random_state: ${train.log_reg_full.random_state}
+      log_reg_rf_select:
+        name: log_reg_rf_select
+        random_state: ${train.log_reg_rf_select.random_state}
+      xgboost:
+        name: xgboost
+        random_state: ${train.xgboost.random_state}
+      decision_tree:
+        name: decision_tree
+        random_state: ${train.decision_tree.random_state}
     do:
       cmd: >-
         python src/evaluation/evaluate_model.py 
-        --metrics-file=./metrics/${item}.json
-        --model-file=./models/${item}.pkl
+        --metrics-file=./metrics/${item.name}/rs_${item.random_state}.json
+        --model-file=./models/${item.name}/rs_${item.random_state}.pkl
       deps:
         - data/processed/X_test.npy
         - data/processed/y_test.npy
-        - models/${item}.pkl
+        - models/${item.name}/rs_${item.random_state}.pkl
       metrics:
-        - ./metrics/${item}.json
+        - ./metrics/${item.name}/rs_${item.random_state}.json
   
   # train_log_reg_full:
   #   cmd: python src/training/train_log_reg_full.py

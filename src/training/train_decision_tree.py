@@ -16,7 +16,7 @@ def main() -> None:
 
     clf = DecisionTreeClassifier(random_state=args.random_state).fit(X, y)
 
-    with open('./models/decision_tree.pkl', 'wb') as f:
+    with open(f'./models/decision_tree/rs_{args.random_state}.pkl', 'wb') as f:
         pickle.dump(clf, f)
 
 main()

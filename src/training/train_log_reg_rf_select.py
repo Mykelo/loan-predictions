@@ -19,7 +19,7 @@ def main() -> None:
 
     clf = LogisticRegressionRF(random_state=args.random_state, features_num=100).fit(X, y)
 
-    with open('./models/log_reg_rf_select.pkl', 'wb') as f:
+    with open(f'./models/log_reg_rf_select/rs_{args.random_state}.pkl', 'wb') as f:
         pickle.dump(clf, f)
 
 main()
