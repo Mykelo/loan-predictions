@@ -1,6 +1,6 @@
 import os, sys
 sys.path.insert(0, os.path.abspath("."))
-from typing import Any
+from typing import Any, Optional
 import numpy as np
 import argparse
 from sklearn.tree import DecisionTreeClassifier
@@ -12,7 +12,7 @@ import json
 from tqdm import tqdm
 
 
-def get_model(name: str, random_state: int) -> Any:
+def get_model(name: str, random_state: Optional[int] = None) -> Any:
     clf = None
     if name == 'xgboost':
         clf = xgb.XGBClassifier(seed=random_state)
@@ -49,7 +49,7 @@ def main() -> None:
     }
 
     for i in tqdm(range(args.iterations)):
-        model = get_model(args.model, i)
+        model = get_model(args.model)
         model.fit(X_train, y_train)
         model_metrics = calculate_metrics(y_test, model.predict(X_test))
         metrics['accuracy'].append(model_metrics['accuracy'])

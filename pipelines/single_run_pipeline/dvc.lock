@@ -41,8 +41,8 @@ stages:
       size: 8847384
     outs:
     - path: models/decision_tree/rs_1.pkl
-      md5: ed52ce8fdf28ea1a1ffd24d64055f960
-      size: 516066
+      md5: d3f87b020c9f0022051de23f59a8b9f1
+      size: 1674
   evaluate@decision_tree:
     cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/decision_tree/rs_1.json
       --model-file=./models/decision_tree/rs_1.pkl

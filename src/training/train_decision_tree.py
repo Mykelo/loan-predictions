@@ -14,7 +14,7 @@ def main() -> None:
     X = np.load(args.X_input)
     y = np.load(args.y_input)
 
-    clf = DecisionTreeClassifier(random_state=args.random_state).fit(X, y)
+    clf = DecisionTreeClassifier(ccp_alpha=0.01, random_state=args.random_state).fit(X, y)
 
     with open(f'./models/decision_tree/rs_{args.random_state}.pkl', 'wb') as f:
         pickle.dump(clf, f)
