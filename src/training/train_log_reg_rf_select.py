@@ -10,6 +10,9 @@ from sklearn.pipeline import Pipeline
 
 
 def main() -> None:
+    """
+    Script for training Logistic Regression using features selected by Random Forest.
+    """
     parser = argparse.ArgumentParser(description='Train logistic regression using features selected by Random Forest')
     parser.add_argument('--X-input', type=str, help='Features input file', default='./data/processed/X_train.npy')
     parser.add_argument('--y-input', type=str, help='Labels input file', default='./data/processed/y_train.npy')

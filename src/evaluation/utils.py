@@ -3,6 +3,9 @@ import numpy as np
 
 
 def calculate_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
+    """
+    Calculates accuracy, sensitivity, specificity and AUC.
+    """
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
     accuracy = (tp + tn) / (tp + tn + fp + fn)
     sensitivity = tp / (tp + fn)

@@ -15,6 +15,9 @@ from sklearn.pipeline import Pipeline
 
 
 def get_model(name: str, random_state: Optional[int] = None) -> Any:
+    """
+    Creates a model object based on the specified name.
+    """
     clf = None
     if name == 'xgboost':
         clf = xgb.XGBClassifier(seed=random_state)
@@ -28,6 +31,10 @@ def get_model(name: str, random_state: Optional[int] = None) -> Any:
 
 
 def main() -> None:
+    """
+    Trains and evaluates the specified model the given number of times. Results are then saved
+    in a file. 
+    """
     parser = argparse.ArgumentParser(description='Train and evaluate selected model the given number of times')
     parser.add_argument('--X-train', type=str, help='Features input file', default='./data/processed/X_train.npy')
     parser.add_argument('--X-test', type=str, help='Features input file', default='./data/processed/X_test.npy')
@@ -52,6 +59,7 @@ def main() -> None:
 
     for i in tqdm(range(args.iterations)):
         model = get_model(args.model)
+        
         clf = Pipeline(steps=[
             ('scaler', StandardScaler()),
             ('model', model)

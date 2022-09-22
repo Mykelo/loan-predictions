@@ -8,6 +8,11 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 class LogisticRegressionRF(BaseEstimator, ClassifierMixin):
+    """
+    Custom model responsible for calculating feature importances using
+    Random Forest and using them to select top N features before training
+    Logistic regression.
+    """
 
     def __init__(self, random_state: Optional[int] = 0, features_num: int = 100, max_depth: int = 3):
         self.random_state = random_state
@@ -25,6 +30,7 @@ class LogisticRegressionRF(BaseEstimator, ClassifierMixin):
         self.classes_ = unique_labels(y)
 
         self.random_forest.fit(X, y)
+        # Find the most important features
         self.top_features = np.argsort(self.random_forest.feature_importances_)[-self.features_num:]
 
         self.logistic_regression.fit(X[:, self.top_features], y)

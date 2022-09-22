@@ -19,6 +19,7 @@ stages:
       deps:
         - data/processed/X_train.npy
         - data/processed/y_train.npy
+        - src/training/train_${item.name}.py
       outs:
         - models/${item.name}/rs_${item.random_state}.pkl
 
@@ -46,5 +47,6 @@ stages:
         - data/processed/X_test.npy
         - data/processed/y_test.npy
         - models/${item.name}/rs_${item.random_state}.pkl
+        - src/evaluation/evaluate_model.py
       metrics:
         - ./metrics/${item.name}/rs_${item.random_state}.json

@@ -9,6 +9,10 @@ import json
 
 
 def main() -> None:
+    """
+    Evaluates a model specified by a file path. It assumes that a model is implemented
+    using scikit-learn API.
+    """
     parser = argparse.ArgumentParser(description='Evaluate a specified model')
     parser.add_argument('--model-file', type=str, help='Saved model path', required=True)
     parser.add_argument('--metrics-file', type=str, help='Metrics path', required=True)

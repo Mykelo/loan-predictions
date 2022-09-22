@@ -25,11 +25,11 @@ stages:
       --model=log_reg_full
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: c27f4f411c252e6252615e1a79c1d965
+      size: 387067928
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: ef43be09f109138a1181fdbcf405d8b9
+      size: 1548269928
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
@@ -38,18 +38,18 @@ stages:
       size: 8847384
     outs:
     - path: ./metrics/log_reg_full.json
-      md5: a2e0a4c7f268c086077d25492ac6cab4
+      md5: 8441639c39ecfea518031563989ac0b8
       size: 847
   test_model@decision_tree:
     cmd: python src/evaluation/train_evaluate_model.py  --metrics-file=./metrics/decision_tree.json
       --model=decision_tree
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: c27f4f411c252e6252615e1a79c1d965
+      size: 387067928
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: ef43be09f109138a1181fdbcf405d8b9
+      size: 1548269928
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944

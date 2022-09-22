@@ -5,6 +5,9 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def main() -> None:
+    """
+    Script for training a decision tree classifier.
+    """
     parser = argparse.ArgumentParser(description='Train decision tree using all features')
     parser.add_argument('--X-input', type=str, help='Features input file', default='./data/processed/X_train.npy')
     parser.add_argument('--y-input', type=str, help='Labels input file', default='./data/processed/y_train.npy')
