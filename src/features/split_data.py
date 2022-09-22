@@ -3,19 +3,15 @@ from sklearn.model_selection import train_test_split
 import argparse
 
 def main() -> None:
+    """
+    Script responsible for splitting raw data and encoding the target column.
+    """
     parser = argparse.ArgumentParser(description='Encode the target label and split data')
     parser.add_argument('--input', type=str, help='Input file', default='./data/raw/accepted_2007_to_2018Q4.csv')
     
     args = parser.parse_args()
 
-    # date_columns = [
-    #     'issue_d',
-    #     'earliest_cr_line',
-    #     'last_credit_pull_d',
-    #     'last_pymnt_d',
-    #     'sec_app_earliest_cr_line'
-    # ]
-    data = pd.read_csv(args.input)#, parse_dates=date_columns, infer_datetime_format=True)
+    data = pd.read_csv(args.input)
     data = data.reset_index(drop=True)
 
     X = data[data['loan_status'] != 'Current'].copy()
