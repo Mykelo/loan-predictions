@@ -35,7 +35,7 @@ def fill_na(df: pd.DataFrame, source: pd.DataFrame) -> pd.DataFrame:
         'mths_since_rcnt_il', 'mths_since_recent_bc', 'mths_since_recent_bc_dlq',
         'mths_since_recent_inq', 'mths_since_recent_revol_delinq',
         'pct_tl_nvr_dlq']
-    fill_min = np.setdiff1d(source.select_dtypes('object').columns.values, fill_max) 
+    fill_min = np.setdiff1d(source.columns.values, fill_max) 
     
     df_copy = df.copy()
     df_copy[fill_max] = df_copy[fill_max].fillna(source[fill_max].max(numeric_only=True))
@@ -92,7 +92,7 @@ def main() -> None:
 
     # These columns either have too many unique values or are correlated with other
     # categorical columns
-    cat_to_drop = ['emp_title', 'url', 'policy_code', 'sub_grade', 'title', 'zip_code']
+    cat_to_drop = ['emp_title', 'url', 'policy_code', 'sub_grade', 'title', 'zip_code', 'debt_settlement_flag']
 
     train_data = train_data \
         .pipe(parse_emp_length) \
