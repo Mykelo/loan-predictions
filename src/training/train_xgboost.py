@@ -10,8 +10,8 @@ def main() -> None:
     parser.add_argument('--random-state', type=int, help='Random state', default=42)
     args = parser.parse_args()
 
-    X = np.load(args.X_input)
-    y = np.load(args.y_input)
+    X = np.load(args.X_input, allow_pickle=True)
+    y = np.load(args.y_input, allow_pickle=True)
 
     xgb_model = xgb.XGBClassifier(seed=args.random_state)
     xgb_model = xgb_model.fit(X, y)

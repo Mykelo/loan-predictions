@@ -45,15 +45,15 @@ stages:
       md5: 424716ffaaae0d6b63b8e1cab5b7832a
       size: 562009103
     - path: src/features/encode_features.py
-      md5: ab73830121aff7e5b63b7a1fe9b29712
-      size: 2233
+      md5: ab850847b3d61001e9001ccbfd792722
+      size: 2179
     outs:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: a2ab8f9dd0b143b10a34aebbf2e972c5
+      size: 105061388
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: b2ba8629137421aa55155c75e2ba30ab
+      size: 420244788
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
@@ -61,5 +61,5 @@ stages:
       md5: 635027b569a6bd54bfc25707ef2ee8f9
       size: 8847384
     - path: models/columns_encoder.pkl
-      md5: 82834c4134cb61a686f35506dc75b99e
-      size: 6121
+      md5: d1b66f7c089561c31d06ca8b983bcc09
+      size: 3704

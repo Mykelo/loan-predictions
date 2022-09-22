@@ -29,12 +29,11 @@ def main() -> None:
     train_data = train_data.drop(columns=['target'], axis=1)
     test_data = test_data.drop(columns=['target'], axis=1)
 
-    numeric_columns = train_data.select_dtypes('number').columns.values
+    # numeric_columns = train_data.select_dtypes('number').columns.values
     oh_columns = train_data.select_dtypes('object').columns.values 
 
     column_trans = ColumnTransformer(
-        [('numeric', StandardScaler(), numeric_columns),
-        ('categories', OneHotEncoder(dtype='int', sparse=True), oh_columns)],
+        [('categories', OneHotEncoder(dtype='int', sparse=False), oh_columns)],
         remainder='drop', verbose_feature_names_out=False)
 
     train_data = column_trans.fit_transform(train_data)

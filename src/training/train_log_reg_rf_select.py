@@ -5,6 +5,8 @@ import numpy as np
 import argparse
 from src.models.custom_models import LogisticRegressionRF
 import pickle
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
 
 def main() -> None:
@@ -14,10 +16,14 @@ def main() -> None:
     parser.add_argument('--random-state', type=int, help='Random state', default=42)
     args = parser.parse_args()
 
-    X = np.load(args.X_input)
-    y = np.load(args.y_input)
+    X = np.load(args.X_input, allow_pickle=True)
+    y = np.load(args.y_input, allow_pickle=True)
 
-    clf = LogisticRegressionRF(random_state=args.random_state, features_num=100).fit(X, y)
+    clf = Pipeline(steps=[
+        ('scaler', StandardScaler()),
+        ('model', LogisticRegressionRF(random_state=args.random_state, features_num=100))
+    ])
+    clf = clf.fit(X, y)
 
     with open(f'./models/log_reg_rf_select/rs_{args.random_state}.pkl', 'wb') as f:
         pickle.dump(clf, f)

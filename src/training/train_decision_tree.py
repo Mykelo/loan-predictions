@@ -11,8 +11,8 @@ def main() -> None:
     parser.add_argument('--random-state', type=int, help='Random state', default=42)
     args = parser.parse_args()
 
-    X = np.load(args.X_input)
-    y = np.load(args.y_input)
+    X = np.load(args.X_input, allow_pickle=True)
+    y = np.load(args.y_input, allow_pickle=True)
 
     clf = DecisionTreeClassifier(ccp_alpha=0.01, random_state=args.random_state).fit(X, y)
 

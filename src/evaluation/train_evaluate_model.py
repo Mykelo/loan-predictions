@@ -10,6 +10,8 @@ from src.models.custom_models import LogisticRegressionRF
 from src.evaluation.utils import calculate_metrics
 import json
 from tqdm import tqdm
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
 
 def get_model(name: str, random_state: Optional[int] = None) -> Any:
@@ -50,8 +52,12 @@ def main() -> None:
 
     for i in tqdm(range(args.iterations)):
         model = get_model(args.model)
-        model.fit(X_train, y_train)
-        model_metrics = calculate_metrics(y_test, model.predict(X_test))
+        clf = Pipeline(steps=[
+            ('scaler', StandardScaler()),
+            ('model', model)
+        ])
+        clf.fit(X_train, y_train)
+        model_metrics = calculate_metrics(y_test, clf.predict(X_test))
         metrics['accuracy'].append(model_metrics['accuracy'])
         metrics['sensitivity'].append(model_metrics['sensitivity'])
         metrics['specificity'].append(model_metrics['specificity'])

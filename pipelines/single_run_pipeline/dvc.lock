@@ -4,119 +4,119 @@ stages:
     cmd: python src/training/train_log_reg_full.py --random-state=1
     deps:
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: b2ba8629137421aa55155c75e2ba30ab
+      size: 420244788
     - path: data/processed/y_train.npy
       md5: 635027b569a6bd54bfc25707ef2ee8f9
       size: 8847384
     outs:
     - path: models/log_reg_full/rs_1.pkl
-      md5: 9e8b3a92ae78d6cc78c84b4e15deb7f2
-      size: 2046
+      md5: 641f529ed838f979c9b92cc3275cc6fc
+      size: 4111
   evaluate@log_reg_full:
     cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/log_reg_full/rs_1.json
       --model-file=./models/log_reg_full/rs_1.pkl
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: a2ab8f9dd0b143b10a34aebbf2e972c5
+      size: 105061388
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
     - path: models/log_reg_full/rs_1.pkl
-      md5: 9e8b3a92ae78d6cc78c84b4e15deb7f2
-      size: 2046
+      md5: 641f529ed838f979c9b92cc3275cc6fc
+      size: 4111
     outs:
     - path: ./metrics/log_reg_full/rs_1.json
-      md5: 8b531b9f46fabf69cff3a077ff67a077
-      size: 129
+      md5: 2f151d40a5a8b0b03317a8b5ca5b9f72
+      size: 130
   train@decision_tree:
     cmd: python src/training/train_decision_tree.py --random-state=1
     deps:
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: b2ba8629137421aa55155c75e2ba30ab
+      size: 420244788
     - path: data/processed/y_train.npy
       md5: 635027b569a6bd54bfc25707ef2ee8f9
       size: 8847384
     outs:
     - path: models/decision_tree/rs_1.pkl
-      md5: d3f87b020c9f0022051de23f59a8b9f1
-      size: 1674
+      md5: d8973c59c09daf71973ad04edaccf2d4
+      size: 1239
   evaluate@decision_tree:
     cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/decision_tree/rs_1.json
       --model-file=./models/decision_tree/rs_1.pkl
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: a2ab8f9dd0b143b10a34aebbf2e972c5
+      size: 105061388
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
     - path: models/decision_tree/rs_1.pkl
-      md5: ed52ce8fdf28ea1a1ffd24d64055f960
-      size: 516066
+      md5: d8973c59c09daf71973ad04edaccf2d4
+      size: 1239
     outs:
     - path: ./metrics/decision_tree/rs_1.json
-      md5: 15d3ea6fd0be27c2dbaafae860c9fe78
-      size: 127
+      md5: 5c73504bff6c085e97a05fff24245e85
+      size: 130
   train@log_reg_rf_select:
     cmd: python src/training/train_log_reg_rf_select.py --random-state=1
     deps:
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: b2ba8629137421aa55155c75e2ba30ab
+      size: 420244788
     - path: data/processed/y_train.npy
       md5: 635027b569a6bd54bfc25707ef2ee8f9
       size: 8847384
     outs:
     - path: models/log_reg_rf_select/rs_1.pkl
-      md5: c325fe9c1fec6206bcbf4e78d1074461
-      size: 131012
+      md5: 9acc9715e59c09a96ad607a2c85ceae3
+      size: 135009
   evaluate@log_reg_rf_select:
     cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/log_reg_rf_select/rs_1.json
       --model-file=./models/log_reg_rf_select/rs_1.pkl
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: a2ab8f9dd0b143b10a34aebbf2e972c5
+      size: 105061388
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
     - path: models/log_reg_rf_select/rs_1.pkl
-      md5: c325fe9c1fec6206bcbf4e78d1074461
-      size: 131012
+      md5: 9acc9715e59c09a96ad607a2c85ceae3
+      size: 135009
     outs:
     - path: ./metrics/log_reg_rf_select/rs_1.json
-      md5: fe84c6d3ee73795c5cc97b562b6b74ab
-      size: 129
+      md5: 2f151d40a5a8b0b03317a8b5ca5b9f72
+      size: 130
   train@xgboost:
     cmd: python src/training/train_xgboost.py --random-state=1
     deps:
     - path: data/processed/X_train.npy
-      md5: 9f37f27609e6dc55872735b0519508f0
-      size: 1512880904
+      md5: b2ba8629137421aa55155c75e2ba30ab
+      size: 420244788
     - path: data/processed/y_train.npy
       md5: 635027b569a6bd54bfc25707ef2ee8f9
       size: 8847384
     outs:
     - path: models/xgboost/rs_1.pkl
-      md5: 16580225c536ec9b5d3fc0e65eb104fa
-      size: 339440
+      md5: 985587c326e056452ff39a4982670b87
+      size: 353958
   evaluate@xgboost:
     cmd: python src/evaluation/evaluate_model.py  --metrics-file=./metrics/xgboost/rs_1.json
       --model-file=./models/xgboost/rs_1.pkl
     deps:
     - path: data/processed/X_test.npy
-      md5: c8eb64ff52b452ca67a27b3d843f6442
-      size: 378220664
+      md5: a2ab8f9dd0b143b10a34aebbf2e972c5
+      size: 105061388
     - path: data/processed/y_test.npy
       md5: b7728573eb3db9d255d5f578541f3f36
       size: 2211944
     - path: models/xgboost/rs_1.pkl
-      md5: 16580225c536ec9b5d3fc0e65eb104fa
-      size: 339440
+      md5: 985587c326e056452ff39a4982670b87
+      size: 353958
     outs:
     - path: ./metrics/xgboost/rs_1.json
-      md5: 5eac65fcc7aea68201853f60299bf93a
-      size: 127
+      md5: 1bc386a4bfbe31e9b7cd6eec9b23c48b
+      size: 130
